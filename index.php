@@ -408,21 +408,46 @@ print 'It took ' + i + ' iterations to sort the deck.';</code></pre>
 				</div>
 			</section>
 		-->
+		<!-- PHP addition for mail available -->
+		<?php
+		     $name = $_POST['name'];
+		     $email = $_POST['email'];
+		     $subject = $_POST['subject'];
+		     $message = $_POST['message'];
+		     $from = 'From: <the-email-that-you-want-it-to-come-from>';
+		     $to = '<recipient-email>';
+		     $email_subject = 'New Contact Form Submission!';
 
+		     $body = "Name: $name\nE-mail: $email\nSubject: $subject\n\nThe message is below:\n$message";;
+		?>
+
+		<?php
+    if (isset($_POST['submitbtn']))
+    {
+        if (mail($to, $email_subject, $body, $from))
+        {
+            echo "<font color=\"green\"><p>ありがとうございます。</p></font>";
+        }
+        else
+        {
+        echo "<font color=\"red\"><p>メッセージ通信が駄目でした。Kentarourase@gmail.comに直接イーメールをお願い致します。</p></font>";
+        }
+    }
+		?>
 		<!-- Footer -->
 			<section id="footer">
 				<div class="container">
 					<header class="major">
 						<h2>お問い合わせ</h2>
 					</header>
-					<form method="post" action="#">
+					<form method="post" action="index.php">
 						<div class="row gtr-uniform">
 							<div class="col-6 col-12-xsmall"><input type="text" name="name" id="name" placeholder="名前" /></div>
 							<div class="col-6 col-12-xsmall"><input type="email" name="email" id="email" placeholder="イーメル" /></div>
 							<div class="col-12"><textarea name="message" id="message" placeholder="メッセージ" rows="4"></textarea></div>
 							<div class="col-12">
 								<ul class="actions special">
-									<li><input type="submit" value="送信" class="primary" /></li>
+									<li><input type="submit" name="submitbtn" value="送信" class="primary" /></li>
 								</ul>
 							</div>
 						</div>
